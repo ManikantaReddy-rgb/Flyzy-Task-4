@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="center">
+      <h1>SignUp</h1>
+      <form >
+        <div class="txt_field">
+          <input type="text" required id="username">
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="email" required id="useremail">
+          <span></span>
+          <label>gmail</label>
+        </div>
+
+        <div class="txt_field">
+          <input type="password" id="password">
+          <span></span>
+          <label>Password</label>
+        </div>
+
+        <div class="pass">Forgot Password?</div>
+        <input type="button" value="SignUp" onclick="SendData()">
+        <div class="signup_link">
+          Not a member? <a href="/login">Login</a>
+        </div>
+      </form>
+    </div>
+    <script>
+
+      function SendData(){
+         
+      var data = {
+              UserName: document.getElementById('username').value,
+              Email: document.getElementById('useremail').value,
+              Password: document.getElementById('password').value,      
+            };
+      
+      fetch('/SendData', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            }) 
+              .then(response => response.json())
+              .then(data => {
+                console.log('success:', data);
+                window.location.href='/login'
+              // var tableBody = document.getElementById('tbody_id');
+              // tableBody.innerHTML = "";
+              // getapi(api_url);
+            })
+            .catch((error) => {
+              alert("Mail ID Already Exits")
+            });
+          }
+    
+      </script>
+    
+
+  </body>
+</html>
